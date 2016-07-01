@@ -84,8 +84,8 @@ hashmap_t* mk_hashmap_custom(size_t size, hashfunction_t fn);
 void rm_hashmap(hashmap_t* hashmap);
 
 //Accessors
-void* hashmap_get(char* key);
-bool hashmap_exists(char* key);
-void hashmap_set(char* key, void* value);
+void* hashmap_get(hashmap_t* hashmap, char* key);
+bool hashmap_exists(hashmap_t* hashmap, char* key);
+void hashmap_set(hashmap_t* hashmap, char* key, void* value);
 
 #endif
