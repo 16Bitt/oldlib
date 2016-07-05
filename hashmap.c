@@ -3,8 +3,17 @@
 #include "math.h"
 #include "oldlib.h"
 
+//This is the Jenkin's "One at a time" hashing algorithm
 size_t generic_hash(char* key, size_t size){
-	return 0;
+	size_t len = strlen(key);
+	size_t index = 0;
+	for(size_t i = 0; i < len; i++){
+		index += key[i];
+		index += index << 10;
+		index ^= index >> 6;
+	}
+
+	return index % size;
 }
 
 hashmap_t* mk_hashmap(size_t size){
@@ -100,14 +109,14 @@ void hashmap_set(hashmap_t* hashmap, char* key, void* value){
     }
 
     //If the primary key is empty, we can just set it
-    if(hashmap->map[index].value.value == NULL){
+    if(hashmap->map[index].value.key == NULL){
         hashmap->map[index].value.value = value;
         hashmap->map[index].value.key = key;
         return;
     }
 
     //If the primary key matches, we can just set it
-    if(hashmap->map[index].value.value != NULL && strcmp(hashmap->map[index].value.key, key) == 0){
+    if(hashmap->map[index].value.key != NULL && strcmp(hashmap->map[index].value.key, key) == 0){
         hashmap->map[index].value.value = value;
         hashmap->map[index].value.key = key;
         return;
