@@ -1,10 +1,9 @@
 SOURCES	= $(patsubst %.c,%.o,$(wildcard *.c))
 TARGET	= test
-OLDLIB	= ../oldlib.a
-CFLAGS	= -Wall -Werror -g -I../
+CFLAGS	= -Wall -Werror -g -I../ -l oldlib
 
 all: $(SOURCES)
-	$(CC) $(CFLAGS) $(SOURCES) $(OLDLIB) -o $(TARGET)
+	$(CC) $(CFLAGS) $(SOURCES) -o $(TARGET)
 
 clean:
 	-rm $(SOURCES)
